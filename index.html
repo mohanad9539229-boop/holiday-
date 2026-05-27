@@ -14,7 +14,9 @@
         }
 
         body {
-            background: radial-gradient(circle at center, #1a0000 0%, #0a0000 100%);
+            /* وضع رابط الصورة الخاصة بك كخلفية للموقع */
+            background: linear-gradient(rgba(10, 0, 0, 0.6), rgba(10, 0, 0, 0.85)), url('https://ibb.co/1J0xrdwt') no-repeat center center fixed;
+            background-size: cover;
             color: #fff;
             min-height: 100vh;
             display: flex;
@@ -22,7 +24,51 @@
             justify-content: center;
             align-items: center;
             overflow: hidden;
-            perspective: 1000px; /* تفعيل البعد الثالث للموقع */
+            perspective: 1000px;
+        }
+
+        /* شاشة الدخول السوداء الفخمة */
+        .welcome-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #050505;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 1s ease, transform 1s ease;
+        }
+
+        .welcome-text {
+            color: #ffffff;
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+            font-weight: bold;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .audio-btn {
+            background: linear-gradient(90deg, #ffd700, #ffb700);
+            color: #000;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .audio-btn:hover {
+            transform: scale(1.08);
+            box-shadow: 0 0 35px #ffd700;
         }
 
         /* جزيئات الخلفية المتحركة */
@@ -36,7 +82,7 @@
             z-index: 1;
         }
 
-        /* حاوية النص المتحرك العلوية (Marquee مطور) */
+        /* حاوية النص المتحرك العلوية */
         .top-ticker {
             position: absolute;
             top: 20px;
@@ -44,7 +90,7 @@
             overflow: hidden;
             white-space: nowrap;
             z-index: 10;
-            background: rgba(139, 0, 0, 0.1);
+            background: rgba(139, 0, 0, 0.2);
             backdrop-filter: blur(5px);
             border-top: 1px solid rgba(255, 215, 0, 0.3);
             border-bottom: 1px solid rgba(255, 215, 0, 0.3);
@@ -80,7 +126,7 @@
         .main-card {
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, rgba(30, 0, 0, 0.8) 0%, rgba(10, 0, 0, 0.95) 100%);
+            background: linear-gradient(135deg, rgba(20, 0, 0, 0.85) 0%, rgba(5, 5, 5, 0.95) 100%);
             border: 2px solid #ffd700;
             border-radius: 20px;
             padding: 40px;
@@ -89,25 +135,12 @@
             justify-content: space-between;
             align-items: center;
             text-align: center;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8), 
-                        0 0 30px rgba(139, 0, 0, 0.5),
-                        inset 0 0 20px rgba(255, 215, 0, 0.2);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.9), 
+                        0 0 30px rgba(139, 0, 0, 0.4),
+                        inset 0 0 20px rgba(255, 215, 0, 0.15);
             backdrop-filter: blur(10px);
             transform-style: preserve-3d;
             position: relative;
-        }
-
-        /* تأثير الوهج الزجاجي المحيط بالبطاقة */
-        .main-card::before {
-            content: '';
-            position: absolute;
-            top: -2px; left: -2px; right: -2px; bottom: -2px;
-            background: linear-gradient(45deg, #ff0000, #8b0000, #ffd700, #000);
-            border-radius: 20px;
-            z-index: -1;
-            transform: translateZ(-10px);
-            filter: blur(20px);
-            opacity: 0.6;
         }
 
         /* العناصر الداخلية وتأثير خروجها بالـ 3D */
@@ -116,7 +149,7 @@
             color: #ffd700;
             text-shadow: 0 0 15px rgba(255, 215, 0, 0.6), 0 5px 5px rgba(0,0,0,0.5);
             font-weight: 900;
-            transform: translateZ(60px); /* يبرز للأمام عند تحريك الماوس */
+            transform: translateZ(60px);
             transition: transform 0.3s ease;
             animation: pulse 2s infinite alternate;
         }
@@ -174,13 +207,11 @@
             transform: translateZ(90px) scale(1.05);
         }
 
-        /* حركات الأنيميشن */
         @keyframes pulse {
             0% { text-shadow: 0 0 10px rgba(255, 215, 0, 0.5); }
             100% { text-shadow: 0 0 25px rgba(255, 215, 0, 0.9), 0 0 10px #ff3333; }
         }
 
-        /* تهيئة للهواتف لضمان التناسق المتكامل */
         @media (max-width: 450px) {
             .card-container {
                 width: 90vw;
@@ -193,52 +224,61 @@
 </head>
 <body>
 
-    <!-- النص المتحرك العلوى -->
+    <audio id="bgMusic" src="https://cropgif.net/audio/1779918156083-1048536a-b3de-400d-9287-07db12773343.mp3" loop></audio>
+
+    <div class="welcome-overlay" id="welcomeOverlay">
+        <div class="welcome-text">اضغط الزر لتشغيل اغنيه الموقع</div>
+        <button class="audio-btn" onclick="startWebsite()">تشغيل الصوت</button>
+    </div>
+
     <div class="top-ticker">
         <div class="ticker-content">
             ✦ تهنئة خاصة بمناسبة العيد السعيد ✦ كل عام وأنتم بخير وصحة وسلامة ✦ عساكم من عواده ✦ تقبل الله منا ومنكم صالح الأعمال ✦ كل عام وأنتم إلى الله أقرب ✦
         </div>
     </div>
 
-    <!-- جزيئات الخلفية (تتولد بالجاوا سكريبت) -->
     <div class="particles" id="particles"></div>
 
-    <!-- حاوية الكرت ثلاثي الأبعاد -->
     <div class="card-container" id="cardContainer">
         <div class="main-card">
-            
-            <!-- الشعار أو الرمز المركزي -->
             <div class="card-logo">🌙</div>
-
-            <!-- النص الأساسي المتحرك بالنبض -->
             <h1 class="card-title">كل عام وأنت بخير</h1>
-
-            <!-- رسالة التهنئة الفخمة -->
             <p class="card-message">
                 بمناسبة الحلول المبارك والجميل، نتمنى لك خطى مليئة بالنجاح والتوفيق.
                 <span class="highlight">أيامك مجيدة وسعيدة!</span>
             </p>
-
-            <!-- زر تفاعلي للمؤثرات الإضافية -->
             <button class="action-btn" onclick="celebrate()">اضغط للفخامة</button>
-
         </div>
     </div>
 
     <script>
         const cardContainer = document.getElementById('cardContainer');
         const particlesContainer = document.getElementById('particles');
+        const welcomeOverlay = document.getElementById('welcomeOverlay');
+        const bgMusic = document.getElementById('bgMusic');
 
-        // تأثير الـ 3D التفاعلي مع حركة الماوس
+        // دالة تشغيل الموسيقى وإخفاء الشاشة السوداء
+        function startWebsite() {
+            // تشغيل الصوت بعد تفاعل المستخدم مباشرة لتخطي حظر المتصفح
+            bgMusic.play().catch(error => {
+                console.log("تعذر تشغيل الصوت تلقائياً:", error);
+            });
+
+            // إخفاء الشاشة السوداء بتأثير اختفاء ناعم
+            welcomeOverlay.style.opacity = '0';
+            welcomeOverlay.style.transform = 'scale(1.1)';
+            setTimeout(() => {
+                welcomeOverlay.style.display = 'none';
+            }, 1000);
+        }
+
+        // تأثير الـ 3D التفاعلي عند تحريك الماوس
         document.addEventListener('mousemove', (e) => {
             const xAxis = (window.innerWidth / 2 - e.pageX) / 15;
             const yAxis = (window.innerHeight / 2 - e.pageY) / 15;
-            
-            // تطبيق التدوير على الكرت بناءً على موقع الماوس
             cardContainer.style.transform = `rotateY(${xAxis}deg) rotateX(${-yAxis}deg)`;
         });
 
-        // إعادة الكرت لوضعه الطبيعي عند خروج الماوس لراحة العين
         document.addEventListener('mouseleave', () => {
             cardContainer.style.transform = `rotateY(0deg) rotateX(0deg)`;
             cardContainer.style.transition = "all 0.5s ease";
@@ -248,7 +288,7 @@
             cardContainer.style.transition = "none";
         });
 
-        // توليد تأثير الجسيمات المضيئة الصاعدة في الخلفية
+        // توليد تأثير الجسيمات المضيئة الصاعدة
         function createParticles() {
             for (let i = 0; i < 40; i++) {
                 const particle = document.createElement('div');
@@ -263,8 +303,6 @@
                 particle.style.boxShadow = `0 0 10px ${particle.style.background}`;
                 
                 particlesContainer.appendChild(particle);
-
-                // حركة صعود الجسيمات
                 animateParticle(particle);
             }
         }
@@ -287,7 +325,7 @@
 
         createParticles();
 
-        // حركة تفاعلية أسطورية عند الضغط على الزر (انفجار ألوان خاطف)
+        // حركة الألعاب النارية عند الضغط على زر الفخامة
         function celebrate() {
             for (let i = 0; i < 50; i++) {
                 const spark = document.createElement('div');
