@@ -15,9 +15,9 @@
         }
 
         body {
-            /* حل مشكلة رابط الخلفية: دمج طبقة لير داكنة مع الصورة لضمان وضوح النصوص والقراءة */
-            background: linear-gradient(135deg, rgba(15, 2, 2, 0.85) 0%, rgba(5, 5, 5, 0.95) 100%), 
-                        url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1920') no-repeat center center fixed;
+            /* حل مشكلة الخلفية: استخدام الرابط المباشر للصورة مع خلفية احتياطية متدرجة فخمة */
+            background: linear-gradient(135deg, rgba(20, 2, 2, 0.88) 0%, rgba(5, 5, 5, 0.98) 100%), 
+                        url('https://i.ibb.co/1J0xrdwt/image.jpg') no-repeat center center fixed;
             background-size: cover;
             color: #fff;
             min-height: 100vh;
@@ -26,39 +26,43 @@
             justify-content: center;
             align-items: center;
             overflow: hidden;
-            perspective: 1500px; /* زيادة البعد ليعطي تأثير 3D أكثر واقعية */
+            perspective: 1500px;
         }
 
-        /* شاشة الدخول السوداء الفخمة */
+        /* حل مشكلة تداخل زر الصوت: شاشة دخول معزولة ومستقلة تماماً باللون الأسود الملكي */
         .welcome-overlay {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at center, #110101 0%, #000000 100%);
-            z-index: 9999;
+            width: 100vw;
+            height: 100vh;
+            background: #000000;
+            z-index: 99999; /* أعلى طبقة ممكنة لمنع التداخل */
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            gap: 25px; /* مسافة أمان ثابتة تمنع دخول النصوص في بعضها */
+            transition: opacity 0.8s ease, transform 0.8s ease, visibility 0.8s;
+            padding: 20px;
+            text-align: center;
         }
 
+        /* عندما تختفي الشاشة السوداء بعد الضغط */
         .welcome-overlay.fade-out {
             opacity: 0;
             visibility: hidden;
-            transform: scale(1.1);
+            transform: scale(1.05);
+            pointer-events: none;
         }
 
         .welcome-text {
             color: #ffd700;
             font-size: 1.6rem;
-            margin-bottom: 25px;
-            text-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
             font-weight: bold;
-            text-align: center;
-            animation: textPulse 2s infinite alternate;
+            max-width: 90%;
+            line-height: 1.5;
         }
 
         .audio-btn {
@@ -71,12 +75,12 @@
             border-radius: 50px;
             cursor: pointer;
             box-shadow: 0 0 25px rgba(255, 0, 0, 0.5);
-            transition: all 0.4s ease;
+            transition: all 0.3s ease;
         }
 
         .audio-btn:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 0 35px #ffd700, inset 0 0 15px rgba(255,255,255,0.3);
+            transform: scale(1.05);
+            box-shadow: 0 0 35px #ffd700;
         }
 
         /* جزيئات الخلفية السحرية المتحركة */
@@ -98,12 +102,11 @@
             overflow: hidden;
             white-space: nowrap;
             z-index: 10;
-            background: rgba(139, 0, 0, 0.15);
+            background: rgba(139, 0, 0, 0.2);
             backdrop-filter: blur(10px);
             border-top: 1px solid rgba(255, 215, 0, 0.3);
             border-bottom: 1px solid rgba(255, 215, 0, 0.3);
             padding: 12px 0;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
         }
 
         .ticker-content {
@@ -120,7 +123,7 @@
             100% { transform: translate3d(-100%, 0, 0); }
         }
 
-        /* حاوية الكرت ثلاثي الأبعاد - حل مشكلة الثبات */
+        /* حاوية الكرت ثلاثي الأبعاد */
         .card-container {
             position: relative;
             width: 420px;
@@ -135,7 +138,7 @@
         .main-card {
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, rgba(35, 5, 5, 0.85) 0%, rgba(10, 10, 10, 0.98) 100%);
+            background: linear-gradient(135deg, rgba(35, 5, 5, 0.88) 0%, rgba(10, 10, 10, 0.98) 100%);
             border: 2px solid rgba(255, 215, 0, 0.7);
             border-radius: 24px;
             padding: 40px;
@@ -188,7 +191,6 @@
             text-shadow: 0 0 20px rgba(255, 215, 0, 0.7), 0 5px 10px rgba(0,0,0,0.5);
             font-weight: 900;
             transform: translateZ(50px);
-            animation: pulseText 2s infinite alternate;
         }
 
         .card-message {
@@ -220,17 +222,14 @@
             cursor: pointer;
             box-shadow: 0 8px 20px rgba(255, 215, 0, 0.3);
             transform: translateZ(60px);
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: all 0.3s ease;
         }
 
         .action-btn:hover {
-            background: linear-gradient(90deg, #ffb700, #ffd700);
             box-shadow: 0 0 30px #ff3333;
-            transform: translateZ(80px) scale(1.08);
-            color: #000;
+            transform: translateZ(80px) scale(1.05);
         }
 
-        /* جميع الحركات الإبداعية المضافة لزيادة الفخامة */
         @keyframes glowShift {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
@@ -240,11 +239,6 @@
         @keyframes floatEffect {
             0%, 100% { transform: translateZ(70px) translateY(0); }
             50% { transform: translateZ(70px) translateY(-10px); }
-        }
-
-        @keyframes textPulse {
-            0% { opacity: 0.7; transform: scale(0.98); }
-            100% { opacity: 1; transform: scale(1.02); }
         }
 
         /* متجاوب تماماً مع الشاشات الصغيرة والهواتف */
@@ -262,7 +256,7 @@
     <audio id="bgMusic" src="https://cropgif.net/audio/1779918156083-1048536a-b3de-400d-9287-07db12773343.mp3" loop></audio>
 
     <div class="welcome-overlay" id="welcomeOverlay">
-        <div class="welcome-text">اضغط الزر لتشغيل اغنيه الموقع ودخول التجربة الأسطورية</div>
+        <div class="welcome-text">اضغط الزر لتشغيل اغنيه الموقع</div>
         <button class="audio-btn" onclick="startWebsite()">تشغيل الصوت 🌙</button>
     </div>
 
@@ -297,46 +291,35 @@
         const welcomeOverlay = document.getElementById('welcomeOverlay');
         const bgMusic = document.getElementById('bgMusic');
 
-        // دالة الدخول الآمن وتشغيل الموسيقى بدون مشاكل متصفح
+        // دالة الدخول الآمن وتشغيل الموسيقى وإخفاء الشاشة السوداء
         function startWebsite() {
-            bgMusic.play().then(() => {
-                console.log("تم تشغيل الصوت بنجاح");
-            }).catch(err => {
-                console.log("المتصفح يطلب تفاعل إضافي: ", err);
+            bgMusic.play().catch(err => {
+                console.log("المتصفح حظر التشغيل المباشر: ", err);
             });
-            
-            // إخفاء الشاشة الترحيبية بنعومة فائقة
             welcomeOverlay.classList.add('fade-out');
         }
 
-        // حل مشكلة تتبع الحركة وتنعيم تأثير الـ 3D لمنع الارتجاف على الأجهزة الذكية
-        let isMoving = false;
+        // تأثير الـ 3D التفاعلي عند تحريك الماوس للكمبيوتر
         document.addEventListener('mousemove', (e) => {
-            if(window.innerWidth < 768) return; // إيقاف الماوس على الهواتف لعدم الحاجة له
-            
+            if(window.innerWidth < 768) return; 
             const xAxis = (window.innerWidth / 2 - e.pageX) / 20;
             const yAxis = (window.innerHeight / 2 - e.pageY) / 20;
-            
             cardContainer.style.transform = `rotateY(${xAxis}deg) rotateX(${-yAxis}deg)`;
         });
 
-        // إعادة الكرت بسلاسة مريحة عند مغادرة الماوس شاشة العرض
         document.addEventListener('mouseleave', () => {
             cardContainer.style.transform = `rotateY(0deg) rotateX(0deg)`;
         });
 
         // نظام جزيئات الغبار الكوني المتساقط الفريد من نوعه
         function createParticles() {
-            const count = window.innerWidth < 600 ? 25 : 60; // تقليل العدد للهواتف لزيادة الأداء وسرعة التصفح
+            const count = window.innerWidth < 600 ? 25 : 60;
             for (let i = 0; i < count; i++) {
                 const particle = document.createElement('div');
                 particle.style.position = 'absolute';
-                
-                // أحجام عشوائية لخلق عمق بصري (Bokeh Effect)
                 const size = Math.random() * 5 + 1;
                 particle.style.width = size + 'px';
                 particle.style.height = size + 'px';
-                
                 particle.style.background = Math.random() > 0.4 ? '#ffd700' : '#ff3333';
                 particle.style.borderRadius = '50%';
                 particle.style.top = Math.random() * 100 + 'vh';
@@ -367,20 +350,16 @@
 
         createParticles();
 
-        // إضافة تأثير انفجار ألعاب نارية فخمة متناسقة الألوان عند الضغط على الزر الأساسي
+        // تأثير ألعاب نارية فخمة عند الضغط على الزر الأساسي
         function celebrate() {
             for (let i = 0; i < 60; i++) {
                 const spark = document.createElement('div');
                 spark.style.position = 'absolute';
                 spark.style.width = Math.random() * 6 + 4 + 'px';
                 spark.style.height = spark.style.width;
-                
-                // توزيع الألوان الملكية: ذهبي وأحمر وأبيض لامع
                 const colors = ['#ffd700', '#ff3333', '#ffffff', '#ffb700'];
                 spark.style.background = colors[Math.floor(Math.random() * colors.length)];
                 spark.style.borderRadius = '50%';
-                
-                // تحديد مركز الانفجار من منتصف شاشة العرض تماماً
                 spark.style.top = '50%';
                 spark.style.left = '50%';
                 spark.style.boxShadow = `0 0 15px ${spark.style.background}`;
@@ -397,7 +376,7 @@
                 function launch() {
                     x += Math.cos(angle) * velocity;
                     y += Math.sin(angle) * velocity;
-                    y += 0.2; // إضافة تأثير الجاذبية البسيط لنزول الشظايا لأسفل بواقعية
+                    y += 0.2; 
                     opacity -= 0.015;
                     
                     spark.style.transform = `translate(${x}px, ${y}px)`;
