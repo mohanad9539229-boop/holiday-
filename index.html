@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>كل عام وأنتم بخير | الإصدار الشفاف الأنيق</title>
+    <title>كل عام وأنتم بخير | الإصدار الشفاف بالكامل</title>
     <style>
         * {
             margin: 0;
@@ -14,8 +14,8 @@
         }
 
         body {
-            /* تم تقليل التعتيم هنا لتظهر تفاصيل صورتك الخلفية بوضوح أكبر */
-            background: linear-gradient(135deg, rgba(20, 2, 2, 0.5) 0%, rgba(5, 5, 5, 0.6) 100%), 
+            /* الخلفية شفافة تماماً لإبراز صورتك بالكامل */
+            background: linear-gradient(135deg, rgba(20, 2, 2, 0.3) 0%, rgba(5, 5, 5, 0.4) 100%), 
                         url('https://i.ibb.co/3YTHpML9/IMG-5620.jpg') no-repeat center center fixed;
             background-size: cover;
             color: #fff;
@@ -28,7 +28,6 @@
             perspective: 1500px;
         }
 
-        /* شاشة البدء معتمة تماماً لمنع تداخل النصوص، والزر أصبح فوق على الجنب */
         .welcome-overlay {
             position: fixed;
             top: 0;
@@ -44,7 +43,6 @@
             transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.8s;
         }
 
-        /* زر تشغيل الصوت الصغير الدائري الموضع في الأعلى على الجانب مع شكل متحرك */
         .audio-btn {
             position: absolute;
             top: 20px;
@@ -100,10 +98,10 @@
             overflow: hidden;
             white-space: nowrap;
             z-index: 10;
-            background: rgba(139, 0, 0, 0.15);
+            background: rgba(139, 0, 0, 0.1);
             backdrop-filter: blur(5px);
-            border-top: 1px solid rgba(255, 215, 0, 0.2);
-            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+            border-top: 1px solid rgba(255, 215, 0, 0.15);
+            border-bottom: 1px solid rgba(255, 215, 0, 0.15);
             padding: 12px 0;
         }
 
@@ -131,12 +129,12 @@
             will-change: transform;
         }
 
-        /* جعل الكرت شفافاً بالكامل مع تأثير زجاجي مموه راقي ليعرض الخلفية بوضوح */
+        /* تعديل المربع في النص ليكون شفافاً بالكامل تقريباً مع تأثير زجاجي فخم */
         .main-card {
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, rgba(35, 5, 5, 0.35) 0%, rgba(10, 10, 10, 0.45) 100%);
-            border: 2px solid rgba(255, 215, 0, 0.5);
+            background: rgba(255, 255, 255, 0.03); /* تم جعل الخلفية شفافة جداً */
+            border: 2px solid rgba(255, 215, 0, 0.6); /* إطار ذهبي لامع */
             border-radius: 24px;
             padding: 40px;
             display: flex;
@@ -144,41 +142,41 @@
             justify-content: space-between;
             align-items: center;
             text-align: center;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5), 
-                        inset 0 0 30px rgba(255, 215, 0, 0.05);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3), 
+                        inset 0 0 20px rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(8px); /* تأثير تمويه الزجاج */
+            -webkit-backdrop-filter: blur(8px);
             transform-style: preserve-3d;
         }
 
-        /* تقليل توهج النيون الخلفي لمنع حجب تفاصيل صورتك */
+        /* إزالة التوهج الخلفي المكثف لكي لا يحجب الصورة خلف المربع */
         .main-card::after {
             content: '';
             position: absolute;
             inset: -2px;
-            background: linear-gradient(45deg, #ffd700, #ff3333, #8b0000, #ffd700);
-            background-size: 300% 300%;
+            background: linear-gradient(45deg, rgba(255,215,0,0.3), rgba(255,51,51,0.2), rgba(255,215,0,0.3));
             border-radius: 24px;
             z-index: -1;
             transform: translateZ(-20px);
-            filter: blur(25px);
-            opacity: 0.3;
-            animation: glowShift 8s ease infinite;
+            filter: blur(20px);
+            opacity: 0.4;
         }
 
+        /* جعل خلفية الشعار الدائري داخل الكرت شفافة أيضاً */
         .card-logo {
             width: 110px;
             height: 110px;
-            background: radial-gradient(circle, rgba(170, 0, 0, 0.6) 0%, rgba(34, 0, 0, 0.7) 100%);
+            background: rgba(139, 0, 0, 0.25);
             border: 2px solid #ffd700;
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
-            box-shadow: 0 0 25px rgba(255, 51, 51, 0.4);
+            box-shadow: 0 0 25px rgba(255, 215, 0, 0.2);
             transform: translateZ(70px);
             font-size: 2.8rem;
             animation: floatEffect 4s ease-in-out infinite;
+            backdrop-filter: blur(5px);
         }
 
         .card-title {
@@ -193,7 +191,7 @@
             font-size: 1.4rem;
             line-height: 1.8;
             color: #f0f0f0;
-            text-shadow: 0 2px 5px rgba(0,0,0,0.9);
+            text-shadow: 0 2px 8px rgba(0,0,0,0.9);
             transform: translateZ(40px);
         }
 
@@ -203,7 +201,7 @@
             display: block;
             font-size: 1.7rem;
             margin-top: 12px;
-            text-shadow: 0 0 15px rgba(255, 51, 51, 0.6);
+            text-shadow: 0 0 15px rgba(255, 51, 51, 0.8);
         }
 
         .action-btn {
@@ -223,12 +221,6 @@
         .action-btn:hover {
             box-shadow: 0 0 30px #ff3333;
             transform: translateZ(80px) scale(1.05);
-        }
-
-        @keyframes glowShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
         }
 
         @keyframes floatEffect {
