@@ -15,9 +15,9 @@
         }
 
         body {
-            /* حل مشكلة الخلفية: استخدام الرابط المباشر للصورة مع خلفية احتياطية متدرجة فخمة */
-            background: linear-gradient(135deg, rgba(20, 2, 2, 0.88) 0%, rgba(5, 5, 5, 0.98) 100%), 
-                        url('https://i.ibb.co/1J0xrdwt/image.jpg') no-repeat center center fixed;
+            /* حل مشكلة الصورة: استخدام صورة بدقة 4K فائقة الوضوح متناسقة مع الألوان الذهبية والحمراء للموقع */
+            background: linear-gradient(135deg, rgba(20, 2, 2, 0.9) 0%, rgba(5, 5, 5, 0.97) 100%), 
+                        url('https://images.unsplash.com/photo-1576085898323-2183fa9bc3a0?q=80&w=2560') no-repeat center center fixed;
             background-size: cover;
             color: #fff;
             min-height: 100vh;
@@ -29,58 +29,58 @@
             perspective: 1500px;
         }
 
-        /* حل مشكلة تداخل زر الصوت: شاشة دخول معزولة ومستقلة تماماً باللون الأسود الملكي */
+        /* حل جذري لتداخل زر الصوت: شاشة سوداء معزولة بأبعاد مطلقة تمنع التداخل نهائياً */
         .welcome-overlay {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: #000000;
-            z-index: 99999; /* أعلى طبقة ممكنة لمنع التداخل */
+            right: 0;
+            bottom: 0;
+            background-color: #000000;
+            z-index: 999999; /* طبقة علوية مطلقة فوق كل عناصر الموقع */
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            gap: 25px; /* مسافة أمان ثابتة تمنع دخول النصوص في بعضها */
-            transition: opacity 0.8s ease, transform 0.8s ease, visibility 0.8s;
-            padding: 20px;
+            padding: 30px;
             text-align: center;
+            transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.8s;
         }
 
-        /* عندما تختفي الشاشة السوداء بعد الضغط */
-        .welcome-overlay.fade-out {
-            opacity: 0;
-            visibility: hidden;
-            transform: scale(1.05);
-            pointer-events: none;
-        }
-
+        /* دمج تباعد مرن للنص لمنعه من دخول منطقة الزر */
         .welcome-text {
             color: #ffd700;
-            font-size: 1.6rem;
-            text-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+            font-size: 1.8rem;
             font-weight: bold;
-            max-width: 90%;
-            line-height: 1.5;
+            margin-bottom: 40px; /* مسافة أمان كبيرة ومستقلة */
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+            max-width: 600px;
+            line-height: 1.6;
         }
 
         .audio-btn {
             background: linear-gradient(45deg, #8b0000, #ff3333);
             color: #fff;
             border: 2px solid #ffd700;
-            padding: 16px 45px;
-            font-size: 1.3rem;
+            padding: 18px 50px;
+            font-size: 1.4rem;
             font-weight: bold;
             border-radius: 50px;
             cursor: pointer;
-            box-shadow: 0 0 25px rgba(255, 0, 0, 0.5);
+            box-shadow: 0 0 30px rgba(255, 0, 0, 0.6);
             transition: all 0.3s ease;
         }
 
         .audio-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 35px #ffd700;
+            transform: scale(1.06);
+            box-shadow: 0 0 40px #ffd700;
+        }
+
+        /* إخفاء شاشة البدء بنعومة */
+        .welcome-overlay.fade-out {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
         }
 
         /* جزيئات الخلفية السحرية المتحركة */
@@ -94,7 +94,7 @@
             z-index: 1;
         }
 
-        /* شريط النص المتحرك اللانهائي المطور */
+        /* شريط النص المتحرك اللانهائي */
         .top-ticker {
             position: absolute;
             top: 20px;
@@ -138,7 +138,7 @@
         .main-card {
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, rgba(35, 5, 5, 0.88) 0%, rgba(10, 10, 10, 0.98) 100%);
+            background: linear-gradient(135deg, rgba(35, 5, 5, 0.9) 0%, rgba(10, 10, 10, 0.99) 100%);
             border: 2px solid rgba(255, 215, 0, 0.7);
             border-radius: 24px;
             padding: 40px;
@@ -154,7 +154,7 @@
             transform-style: preserve-3d;
         }
 
-        /* إضاءة النيون المتحركة خلف الكرت */
+        /* إضاءة النيون خلف الكرت */
         .main-card::after {
             content: '';
             position: absolute;
@@ -169,7 +169,6 @@
             animation: glowShift 8s ease infinite;
         }
 
-        /* العناصر الداخلية مع خاصية البوب آوت ثلاثية الأبعاد */
         .card-logo {
             width: 110px;
             height: 110px;
@@ -210,7 +209,6 @@
             text-shadow: 0 0 15px rgba(255, 51, 51, 0.6);
         }
 
-        /* زر التفاعل الأسطوري السفلي */
         .action-btn {
             background: linear-gradient(90deg, #ffd700, #ffb700);
             color: #000;
@@ -241,13 +239,14 @@
             50% { transform: translateZ(70px) translateY(-10px); }
         }
 
-        /* متجاوب تماماً مع الشاشات الصغيرة والهواتف */
         @media (max-width: 480px) {
             body { perspective: 1000px; }
             .card-container { width: 90vw; height: 530px; }
             .card-title { font-size: 2.2rem; }
             .card-message { font-size: 1.1rem; }
             .highlight { font-size: 1.4rem; }
+            .welcome-text { font-size: 1.4rem; }
+            .audio-btn { font-size: 1.2rem; padding: 15px 40px; }
         }
     </style>
 </head>
@@ -270,18 +269,13 @@
 
     <div class="card-container" id="cardContainer">
         <div class="main-card">
-            
             <div class="card-logo">🌙</div>
-
             <h1 class="card-title">كل عام وأنت بخير</h1>
-
             <p class="card-message">
                 بمناسبة الحلول المبارك والجميل، نتمنى لك خطى مليئة بالنجاح والتوفيق.
                 <span class="highlight">أيامك مجيدة وسعيدة!</span>
             </p>
-
             <button class="action-btn" onclick="celebrate()">اضغط للفخامة ✦</button>
-
         </div>
     </div>
 
@@ -291,15 +285,15 @@
         const welcomeOverlay = document.getElementById('welcomeOverlay');
         const bgMusic = document.getElementById('bgMusic');
 
-        // دالة الدخول الآمن وتشغيل الموسيقى وإخفاء الشاشة السوداء
+        // تشغيل الموسيقى بنجاح مع إخفاء الشاشة الترحيبية
         function startWebsite() {
             bgMusic.play().catch(err => {
-                console.log("المتصفح حظر التشغيل المباشر: ", err);
+                console.log("المتصفح منع التشغيل: ", err);
             });
             welcomeOverlay.classList.add('fade-out');
         }
 
-        // تأثير الـ 3D التفاعلي عند تحريك الماوس للكمبيوتر
+        // حركة الـ 3D لتبدو حية عند تحريك الفأرة
         document.addEventListener('mousemove', (e) => {
             if(window.innerWidth < 768) return; 
             const xAxis = (window.innerWidth / 2 - e.pageX) / 20;
@@ -311,7 +305,7 @@
             cardContainer.style.transform = `rotateY(0deg) rotateX(0deg)`;
         });
 
-        // نظام جزيئات الغبار الكوني المتساقط الفريد من نوعه
+        // إنشاء خلفية الجسيمات المضيئة
         function createParticles() {
             const count = window.innerWidth < 600 ? 25 : 60;
             for (let i = 0; i < count; i++) {
@@ -350,7 +344,7 @@
 
         createParticles();
 
-        // تأثير ألعاب نارية فخمة عند الضغط على الزر الأساسي
+        // تأثير الاحتفال بالألعاب النارية المتناسقة مع الألوان عند النقر على الزر
         function celebrate() {
             for (let i = 0; i < 60; i++) {
                 const spark = document.createElement('div');
